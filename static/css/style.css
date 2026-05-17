@@ -1,0 +1,232 @@
+/* * استایل‌های پایه برای ظاهر مدرن، ریسپانسیو و بدون وابستگی
+ */
+
+:root {
+    --primary-color: #0d9488;
+    --primary-hover: #0f766e;
+    --secondary-color: #f3f4f6;
+    --secondary-hover: #e5e7eb;
+    --danger-color: #ef4444;
+    --danger-hover: #dc2626;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+    --border-radius: 8px;
+    /* از فونت‌های سیستمی به عنوان جایگزین فونت‌های وب استفاده شده است */
+    --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-family);
+    line-height: 1.6;
+    direction: rtl;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.mt-4 { margin-top: 2rem; }
+.mb-4 { margin-bottom: 2rem; }
+.mt-3 { margin-top: 1.5rem; }
+.text-center { text-align: center; }
+.w-100 { width: 100%; }
+
+/* تنظیمات نوار بالایی (Navbar) */
+.navbar {
+    background-color: var(--card-bg);
+    box-shadow: var(--shadow-sm);
+    padding: 15px 0;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* تنظیمات کارت‌ها (Cards) */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    box-shadow: var(--shadow-md);
+}
+
+.login-card {
+    max-width: 400px;
+    margin-top: 10vh;
+}
+
+/* فرم‌ها و ورودی‌ها */
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.form-control {
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-family: var(--font-family);
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2);
+}
+
+/* ردیف‌های داینامیک فرم */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed var(--border-color);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.form-row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.flex-2 { flex: 2; min-width: 200px; }
+.flex-1 { flex: 1; min-width: 100px; }
+
+/* دکمه‌ها */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-family: var(--font-family);
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.1s;
+    text-decoration: none;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover { background-color: var(--primary-hover); }
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover { background-color: var(--secondary-hover); }
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+    padding: 10px 15px;
+}
+
+.btn-danger:hover { background-color: var(--danger-hover); }
+
+/* داشبورد */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-box {
+    background-color: var(--bg-color);
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+.stat-box strong {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    display: block;
+    margin-top: 5px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ریسپانسیو */
+@media (max-width: 600px) {
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .stats {
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .actions {
+        flex-direction: column;
+    }
+    .btn {
+        width: 100%;
+    }
+}

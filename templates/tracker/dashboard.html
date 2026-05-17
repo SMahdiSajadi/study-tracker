@@ -1,0 +1,100 @@
+{% extends 'tracker/base.html' %}
+
+{% block title %}داشبورد من{% endblock %}
+
+{% block content %}
+<div class="dashboard-header card mb-4">
+    <div>
+        <h2>سلام، {{ student_name }}</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">به پنل ثبت ساعات مطالعه خوش آمدید.</p>
+    </div>
+    <div class="stats">
+        <div class="stat-box">
+            <span>رشته تحصیلی:</span>
+            <strong>{{ major_name }}</strong>
+        </div>
+        <div class="stat-box">
+            <span>مجموع مطالعه امروز:</span>
+            <strong>{{ total_minutes_today }} دقیقه</strong>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h3 style="margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+        ثبت مطالعه جدید
+    </h3>
+    
+    <form method="post" action="{% url 'tracker:dashboard' %}" id="study-form">
+        {% csrf_token %}
+        
+        <!-- نگهدارنده تمام ردیف‌های فرم -->
+        <div id="form-rows-container">
+            
+            <!-- ردیف اول (الگو). این ردیف همیشه هست -->
+            <div class="form-row" id="row-template">
+                <div class="form-group flex-2">
+                    <label>درس مطالعه شده:</label>
+                    <!-- نام subjects[] باعث می‌شود جنگو در سمت بک‌اند بتواند با request.POST.getlist لیستی از دروس را بگیرد -->
+                    <select name="subjects[]" class="form-control" required>
+                        <option value="" disabled selected>لطفاً یک درس را انتخاب کنید...</option>
+                        {% for subject in subjects %}
+                            <option value="{{ subject.id }}">{{ subject.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group flex-1">
+                    <label>مدت زمان (دقیقه):</label>
+                    <!-- نام durations[] برای دریافت لیست زمان‌ها در جنگو -->
+                    <input type="number" name="durations[]" class="form-control" min="1" placeholder="مثال: 45" required>
+                </div>
+                
+                <div class="form-group">
+                    <!-- دکمه حذف برای ردیف اول پنهان است -->
+                    <button type="button" class="btn btn-danger remove-btn" onclick="removeRow(this)" style="display:none;" title="حذف این ردیف">✕</button>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="actions mt-3">
+            <button type="button" class="btn btn-secondary" onclick="addRow()">+ افزودن درس دیگر</button>
+            <button type="submit" class="btn btn-primary">ثبت اطلاعات در سیستم</button>
+        </div>
+    </form>
+</div>
+
+<!-- کدهای جاوااسکریپت خالص (Vanilla JS) برای مدیریت ردیف‌ها -->
+<script>
+    function addRow() {
+        const container = document.getElementById('form-rows-container');
+        const template = document.getElementById('row-template');
+        
+        // کپی گرفتن از ردیف اول شامل تمام المان‌های درون آن
+        const newRow = template.cloneNode(true);
+        
+        // حذف آیدی برای جلوگیری از ایجاد آیدی‌های تکراری در صفحه (استاندارد HTML)
+        newRow.removeAttribute('id');
+        
+        // پاک کردن مقادیر انتخاب شده/تایپ شده در ردیف جدید
+        newRow.querySelector('select').selectedIndex = 0;
+        newRow.querySelector('input').value = '';
+        
+        // دکمه حذف را برای ردیف‌های کپی شده نمایش می‌دهیم
+        const removeBtn = newRow.querySelector('.remove-btn');
+        removeBtn.style.display = 'inline-block';
+        
+        // اضافه کردن ردیف جدید به انتهای نگهدارنده
+        container.appendChild(newRow);
+    }
+
+    function removeRow(buttonElement) {
+        // پیدا کردن والدِ ردیف (تگ div با کلاس form-row) و حذف آن از DOM
+        const row = buttonElement.closest('.form-row');
+        if(row) {
+            row.remove();
+        }
+    }
+</script>
+{% endblock %}

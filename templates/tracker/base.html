@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}سامانه ثبت ساعات مطالعه{% endblock %}</title>
+    <!-- بارگذاری استایل‌های کاملا لوکال بدون نیاز به اینترنت -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-content">
+            <span class="logo">سامانه جامع مطالعه</span>
+            {% if user.is_authenticated %}
+                <!-- در جنگو با توجه به نوع احراز هویت، معمولا دکمه خروج به یک فرم POST نیاز دارد، اما برای سادگی ظاهر اینجا لینک گذاشته شده -->
+                <span style="font-size: 0.9rem; color: var(--text-muted);">
+                    کاربر: {{ user.username }}
+                </span>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        {% block content %}
+        <!-- محتوای صفحات اینجا جای‌گذاری می‌شود -->
+        {% endblock %}
+    </main>
+</body>
+</html>
