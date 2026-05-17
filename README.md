@@ -38,6 +38,7 @@
 ```bash
 git clone [https://github.com/SMahdiSajadi/study-tracker.git](https://github.com/SMahdiSajadi/study-tracker.git)
 cd study-tracker
+```
 
 **۲. ساخت و فعال‌سازی محیط مجازی (Virtual Environment):
 ```bash
@@ -49,11 +50,12 @@ python -m venv venv
 
 # فعال‌سازی در سیستم‌عامل Mac/Linux:
 source venv/bin/activate
-
+```
 
 **۳. نصب نیازمندی‌ها و کتابخانه‌ها:
 ```bash
 pip install -r requirements.txt
+```
 
 **۴. اجرای دیتابیس و روشن کردن سرور:
 ```bash
@@ -65,7 +67,7 @@ python manage.py createsuperuser
 
 # روشن کردن سرور محلی
 python manage.py runserver
-
+```
 
 # ⚙️ راهنمای پنل مدیریت و ثبت اطلاعات پایه
 
